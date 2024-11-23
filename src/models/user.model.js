@@ -57,7 +57,7 @@ const userSchema = new Schema(
 //logic to encrypt pasword // pre hook middleware is used for encryption/decryption
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next(); // check if the password is modified
-    this.password = bcrypt.hash(this.password,10)
+    this.password = await bcrypt.hash(this.password,10)
     next()
 })
 
